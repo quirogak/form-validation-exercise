@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Example</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main>
+        <form novalidate class="form-container" method ="post">
+            <ul>
+                <li>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="mail" name="user_email">
+                </li>
+                <li>
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="user_country">
+                </li>
+                <li>
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" id="zip-code" name="user_zipcode">
+                </li>
+                <li>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="user_password">
+                </li>
+                <li>
+                    <label for="password-confirm">Confirm Password</label>
+                    <input type="password" id="password-confirm" name="user_password-confirm">
+                </li>
+                <li class="button">
+                  <button type="button">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </main>
+    
+</body>
+</html>

@@ -33,7 +33,54 @@ ul {
 
 li {
     list-style: none;
-    display: flex;
-    flex-direction: column;
+    width: 70%;
 }
 
+li.button {
+    display: flex;
+    justify-content: center;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+}
+
+form.submitted input:invalid{
+    border-color: rgb(207, 79, 79);
+  }
+
+input:focus:invalid {
+    outline: none;
+}
+
+.error {
+    width: 100%;
+    padding: 0;
+  
+    font-size: 80%;
+    color: white;
+    background-color: rgb(223, 82, 82);
+    border-radius: 0 0 5px 5px;
+  
+    box-sizing: border-box;
+  }
+  
+  .error.active {
+    padding: 2px;
+  }
+
+.country-select{
+    height: 21px;
+    max-width: 100%;
+}
+
+select,
+input {
+    margin-top: 5px;
+}

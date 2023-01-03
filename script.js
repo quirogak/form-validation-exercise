@@ -10,7 +10,6 @@ const validateForm = (() => {
 
     const checkInputs = (e) => {
 
-     console.log(e.target.id)
 
      const emailErrorSpan = document.querySelector("#email + span.error")
      const countryErrorSpan = document.querySelector("#country + span.error")
@@ -66,6 +65,51 @@ const validateForm = (() => {
         
         zipCodeErrorSpan.className = "error active"
 
+     }
+
+     //in the password validation, i will try to validate as much as possible using JS only.
+
+     const passwordError = () => {
+
+        const specialCharacters = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+        const minCharacters = /^.{8,}$/
+        const upperCase = /.*[A-Z]/
+        const oneNumber = /\d/
+
+        if (password.validity.valueMissing){
+
+            passwordErrorSpan.textContent = "Please enter a password"
+        }
+
+        else if (!minCharacters.test(password.value)) {
+            passwordErrorSpan.textContent = "The entered password should be at least 8 characters long"
+        }
+
+        else if (!upperCase.test(password.value)){
+
+            passwordErrorSpan.textContent = "The entered password requires at least one upper case character."
+
+        }
+
+        else if (!oneNumber.test(password.value)){
+
+            passwordErrorSpan.textContent = "The entered password requires at least one number."
+
+        }
+
+        else if (!specialCharacters.test(password.value)){
+
+            passwordErrorSpan.textContent = "The entered password requires a special character."
+
+        }
+        
+        else if (password.validity.patternMismatch) {
+            console.log(password.value)
+
+        }
+        
+        passwordErrorSpan.className = "error active"
+
 
 
      }
@@ -110,6 +154,19 @@ const validateForm = (() => {
          else if (e.target.id == "zip-code" && !zipCode.validity.valid) {
             zipCodeError() 
          }
+
+
+         //----------------------------------
+
+         if (e.target.id == "password" && password.validity.valid){
+
+            passwordErrorSpan.textContent = ""
+            passwordErrorSpan.className = "error"
+
+         }
+         else if (e.target.id == "password" && !password.validity.valid) {
+            passwordError() 
+         }
          
          
 
@@ -126,13 +183,29 @@ const validateForm = (() => {
 
     }
 
+
+    const putEventListeners = () => {
+
     email.addEventListener("blur",(e) => {checkInputs(e)})
     country.addEventListener("blur",(e) => {checkInputs(e)})
     zipCode.addEventListener("blur",(e) => {checkInputs(e)})
     password.addEventListener("blur",(e) => {checkInputs(e)})
     passwordConfirm.addEventListener("blur",(e) => {checkInputs(e)})
+    form.addEventListener("blur",(e) => {checkSubmit(e)
+        form.classList = "form-container submitted"})
+
+    email.addEventListener("input",(e) => {checkInputs(e)})
+    country.addEventListener("input",(e) => {checkInputs(e)})
+    zipCode.addEventListener("input",(e) => {checkInputs(e)})
+    password.addEventListener("input",(e) => {checkInputs(e)})
+    passwordConfirm.addEventListener("input",(e) => {checkInputs(e)})
     form.addEventListener("submit",(e) => {checkSubmit(e)
         form.classList = "form-container submitted"})
-    return {}
+
+    }
+    return {putEventListeners}
+
 
 })();
+
+validateForm.putEventListeners()

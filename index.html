@@ -290,13 +290,13 @@
                 </li>
                 <li>
                     <label for="zip-code">Zip Code
-                    <input type="text" id="zip-code" name="user_zipcode" pattern="^\d{6}(?:[-\s]\d{4})?$" minlength="5" required>
+                    <input type="text" id="zip-code" name="user_zipcode" pattern="^\d{6}(?:[-\s]\d{4})?$" minlength="6" required>
                     <span class="error"></span>
                     </label>
                 </li>
                 <li>
                     <label for="password">Password
-                    <input type="password" id="password" name="user_password">
+                    <input type="password" id="password" name="user_password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
                     <span class="error"></span>
                     </label>
                 </li>

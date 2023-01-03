@@ -10,7 +10,6 @@ const validateForm = (() => {
 
     const checkInputs = (e) => {
 
-
      const emailErrorSpan = document.querySelector("#email + span.error")
      const countryErrorSpan = document.querySelector("#country + span.error")
      const zipCodeErrorSpan = document.querySelector("#zip-code + span.error")
@@ -110,8 +109,16 @@ const validateForm = (() => {
         
         passwordErrorSpan.className = "error active"
 
+     }
 
+     const passwordConfirmError = () => {
 
+        if (password.validity.valid == false) {
+
+            passwordConfirmErrorSpan.textContent = "The entered password does not match the previous one."
+        }
+
+        passwordConfirmErrorSpan.className = "error active"
      }
 
 
@@ -167,7 +174,20 @@ const validateForm = (() => {
          else if (e.target.id == "password" && !password.validity.valid) {
             passwordError() 
          }
-         
+
+          //----------------------------------
+
+          if (e.target.id == "password-confirm" && passwordConfirm.validity.valid){
+
+
+            passwordConfirmErrorSpan.textContent = ""
+            passwordConfirmErrorSpan.className = "error"
+
+         }
+         else if (e.target.id == "password-confirm" && !passwordConfirm.validity.valid) {
+            passwordConfirmError() 
+            
+         }
          
 
         }
@@ -175,11 +195,24 @@ const validateForm = (() => {
         checkValidity()
     }
 
+    const checkPasswordConfirm = () => {
+
+        if (password.value != passwordConfirm.value){
+
+            passwordConfirm.setCustomValidity("Invalid field.");
+        }
+        else {
+            passwordConfirm.setCustomValidity("");
+        }
+        
+    }
+
     const checkSubmit = (e) => {
 
-        if (!email.validity.valid){
+        if (!email.validity.valid ||!zipCode.validity.valid || !country.validity.valid || !password.validity.valid || !passwordConfirm.validity.valid){
             e.preventDefault()
         }
+        
 
     }
 
@@ -190,6 +223,7 @@ const validateForm = (() => {
     country.addEventListener("blur",(e) => {checkInputs(e)})
     zipCode.addEventListener("blur",(e) => {checkInputs(e)})
     password.addEventListener("blur",(e) => {checkInputs(e)})
+    passwordConfirm.addEventListener("blur",checkPasswordConfirm)
     passwordConfirm.addEventListener("blur",(e) => {checkInputs(e)})
     form.addEventListener("blur",(e) => {checkSubmit(e)
         form.classList = "form-container submitted"})
@@ -198,6 +232,7 @@ const validateForm = (() => {
     country.addEventListener("input",(e) => {checkInputs(e)})
     zipCode.addEventListener("input",(e) => {checkInputs(e)})
     password.addEventListener("input",(e) => {checkInputs(e)})
+    passwordConfirm.addEventListener("input",checkPasswordConfirm)
     passwordConfirm.addEventListener("input",(e) => {checkInputs(e)})
     form.addEventListener("submit",(e) => {checkSubmit(e)
         form.classList = "form-container submitted"})
